@@ -1,0 +1,28 @@
+# Core Python Libraries Used in the Project
+
+# PDF Processing
+PyPDF2
+pdfplumber
+
+# Text Processing / NLP
+nltk
+sentence-transformers
+
+# Vector Database
+faiss-cpu
+
+# Embeddings model (Hugging Face)
+transformers
+huggingface_hub
+
+# LLM Client APIs
+openai
+
+# Utility
+tqdm
+
+# Optional performance (recommended)
+accelerate
+
+# Web UI (optional)
+streamlit
