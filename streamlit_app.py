@@ -146,7 +146,7 @@ def generate_response(prompt, api_key, model="llama-3.3-70b-versatile", max_toke
     """Generate response using Groq LLM - FIXED VERSION"""
     try:
         # Initialize Groq client with ONLY api_key parameter
-        client = Groq(api_key=api_key)
+        client = Groq(api_key="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")
 
         # Create chat completion
         completion = client.chat.completions.create(
@@ -239,35 +239,20 @@ def main():
             st.metric("Embedding Dimension", 384)
 
     # Main content
-    col1, col2 = st.columns([2, 1])
+    st.header("📝 Case Description")
+    user_case = st.text_area(
+        "Describe your legal scenario",
+        placeholder="Example: I was terminated from my private IT job without any prior notice or reason. I was working as a Senior Software Engineer for 3 years...",
+        height=150,
+        help="Provide a detailed description of your legal situation"
+    )
 
-    with col1:
-        st.header("📝 Case Description")
-        user_case = st.text_area(
-            "Describe your legal scenario",
-            placeholder="Example: I was terminated from my private IT job without any prior notice or reason. I was working as a Senior Software Engineer for 3 years...",
-            height=150,
-            help="Provide a detailed description of your legal situation"
-        )
+    analyze_button = st.button("🔍 Analyze Case", type="primary")
 
-        analyze_button = st.button("🔍 Analyze Case", type="primary")
-
-    with col2:
-        st.header("💡 Quick Examples")
-        if st.button("📄 Employment Termination"):
-            user_case = "I was terminated from a private job without notice."
-            st.session_state.example_case = user_case
-        if st.button("⚖️ Contract Breach"):
-            user_case = "The vendor failed to deliver goods as per contract terms."
-            st.session_state.example_case = user_case
-        if st.button("🏢 Property Dispute"):
-            user_case = "Boundary dispute with neighbor over property line."
-            st.session_state.example_case = user_case
-
-        if 'example_case' in st.session_state:
-            user_case = st.session_state.example_case
-            del st.session_state.example_case
-            st.rerun()
+    if 'example_case' in st.session_state:
+        user_case = st.session_state.example_case
+        del st.session_state.example_case
+        st.rerun()
 
     # Analysis logic
     if analyze_button:
@@ -314,7 +299,7 @@ def main():
                 st.divider()
 
         # Main Analysis
-        st.markdown('<div class="analysis-section">', unsafe_allow_html=True)
+        # st.markdown('<div class="analysis-section">', unsafe_allow_html=True)
         st.markdown(st.session_state.response)
         st.markdown('</div>', unsafe_allow_html=True)
 
